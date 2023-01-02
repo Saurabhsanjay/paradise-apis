@@ -2,13 +2,13 @@
 
 const express=require("express")
 const mongoose=require('mongoose')
-const connect=require('./Configs/db')
-const authMiddleware =require("./middleware/authMiddleware")
+const connect=require('./src/Configs/db')
+const authMiddleware =require("./src/middleware/authMiddleware")
 const cors=require('cors')
 
 
-const authRoute=require('./routes/auth')
-const productRoute=require('./routes/auth')
+const authRoute=require('./src/routes/auth')
+const productRoute=require('./src/routes/auth')
 
 mongoose.set('strictQuery', true);
 const PORT = 8080
