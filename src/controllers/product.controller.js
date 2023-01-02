@@ -23,8 +23,8 @@ try {
 }
 const getAllProducts = async (req, res) => {
   try {
-    const products = await productModel.find({Makeup:req.body.Makeup});
-    return res.status(200).send({ products });
+    const products = await productModel.find();
+    return res.status(200).send({ message:"fetched successfully",products });
   } catch (err) {
     console.error(err);
     return res.status(500).send({ error: 'Internal server error' });

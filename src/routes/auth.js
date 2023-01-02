@@ -7,7 +7,7 @@ const{productRoute,getAllProducts,getProductById}=require("../controllers/produc
 Router.use("/signin",signin);
 Router.use("/login",login);
 Router.use("/products",productRoute)
-Router.get("/products/getall",getAllProducts)
+Router.get("/getall",getAllProducts)
 Router.get("/products/:id",getProductById)
 
 module.exports=Router;
