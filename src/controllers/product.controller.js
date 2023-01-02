@@ -23,7 +23,7 @@ try {
 }
 const getAllProducts = async (req, res) => {
   try {
-    const products = await productModel.find();
+    const products = await productModel.find({Makeup:req.body.Makeup});
     return res.status(200).send({ products });
   } catch (err) {
     console.error(err);
