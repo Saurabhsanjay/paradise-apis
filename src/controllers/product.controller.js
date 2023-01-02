@@ -21,6 +21,27 @@ try {
 
 
 }
+const getAllProducts = async (req, res) => {
+  try {
+    const products = await productModel.find();
+    return res.status(200).send({ products });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send({ error: 'Internal server error' });
+  }
+};
 
+const getProductById = async (req, res) => {
+  try {
+    const product = await productModel.findById(req.params.id);
+    if (!product) {
+      return res.status(404).send({ error: 'Product not found' });
+    }
+    return res.status(200).send({ product });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send({ error: 'Internal server error' });
+  }
+};
 
-module.exports={productRoute}
+module.exports={productRoute,getAllProducts,  getProductById}
