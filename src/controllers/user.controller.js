@@ -18,5 +18,24 @@ const data=async(req,res)=>{
     }
 }
 
+const getAllUsers = async (req, res) => {
+    try {
+      const user = await UserModel.find();
+      return res.status(200).send({ message:"fetched successfully",user });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).send({ error: 'Internal server error' });
+    }
+  };
 
-module.exports={data}
+  const getUserByID=async(req,res)=>{
+    try {
+        const userbyid=await UserModel.findById(req.params._id);
+        return res.status(200).send({"message":"userby id fetched succesfully",userbyid})
+    } catch (error) {
+        return res.status(500).send({error:"internal Server Error"})
+    }
+  }
+
+
+module.exports={data,getAllUsers,getUserByID}

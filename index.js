@@ -9,7 +9,8 @@ const cors=require('cors')
 
 const authRoute=require('./src/routes/auth')
 const productRoute=require('./src/routes/auth')
-const { getAllProducts } = require("./src/controllers/product.controller")
+const { getAllProducts, getProductById } = require("./src/controllers/product.controller")
+const {  getAllUsers, getUserByID } = require("./src/controllers/user.controller")
 
 mongoose.set('strictQuery', true);
 const PORT = 8080
@@ -23,6 +24,10 @@ app.use(express.json());
 app.use("/auth",authRoute)
 app.use("/auth",productRoute)
 app.use("/auth",getAllProducts)
+app.use("/auth",getProductById)
+app.use("/",getAllUsers)
+app.use("/", getUserByID);
+
 
 app.get("/", (req, res) => {
   res.send("Hello!");
