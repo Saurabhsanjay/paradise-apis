@@ -25,29 +25,31 @@ const user =await UserModel.findOne({email});
     })
 }
 
-const login = async(req,res)=>{
-    const{email,password}=req.body;
+const login = async(req,res) => {
+    const {email, password} = req.body;
+  
+    // Find the user with the given email
+    const user = await UserModel.findOne({ email });
+    if (!user) {
+      return res.status(404).send({ error: "User not found" });
+    }
+  
+    // Compare the passwords
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).send({ error: "Invalid credentials" });
+    }
+  
+    // Sign the JWT
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "5h",
+    });
 
-
-const user=await UserModel.findOne({email});
-
-if(!user){
-    return res.status(404).send({error:"User not found"});
-}
-bcrypt.compare(password,user.password,async(err,result)=>{
-
-if(err){
-    return res.status(500).send({error:"Internal server error"})
- 
-}
-if (!result) {
-    return res.status(401).send({ error: "Invalid credentials" });
+    // const token = jwt.sign(data, jwtSecretKey, { expiresIn: "1d" });
+  
+    // Send the JWT and the user's name in the response
+    return res.status(200).send({ token, name: user.name, email });
   }
-const token =jwt.sign({_id: user._id},process.env.JWT_SECRET,{
-    expiresIn:"5h",
-})
-return res.status(200).send({token,name:user.name,email,password});
-})
-}
+  
 
 module.exports={signin, login};

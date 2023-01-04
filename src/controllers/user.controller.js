@@ -1,12 +1,14 @@
 const jwt=require('jsonwebtoken');
-
+require('dotenv').config()
 const UserModel=require("../model/user.model")
 const data=async(req,res)=>{
-    const{token}=req.body;
-    try{
-        const decoded=jwt.verify(token,process.env.JWT_SECRET);
+  try{
+      // const token=req.header("authorization");
+      // console.log(token)
+      //   const decoded=jwt.verify(token,process.env.JWT_SECRET);
 
-        const user=await UserModel.findById(decoded._id);
+        const user=await UserModel.findById(req.params._id);
+        // console.log(decoded)
 
         if(!user){
             return res.status(404).send({error:"User not found"})
@@ -14,6 +16,7 @@ const data=async(req,res)=>{
         return res.status(200).send({id: user._id, name: user.name, email: user.email })
 
     }catch(err){
+      console.log(err)
         return res.status(401).send({ error: "Invalid token" });
     }
 }
@@ -30,7 +33,7 @@ const getAllUsers = async (req, res) => {
 
   const getUserByID=async(req,res)=>{
     try {
-        const userbyid=await UserModel.findById(req.params._id);
+        const userbyid=await UserModel.findById(req.params.id);
         return res.status(200).send({"message":"userby id fetched succesfully",userbyid})
     } catch (error) {
         return res.status(500).send({error:"internal Server Error"})
@@ -38,4 +41,4 @@ const getAllUsers = async (req, res) => {
   }
 
 
-module.exports={data,getAllUsers,getUserByID}
+module.exports={getAllUsers,getUserByID}

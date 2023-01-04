@@ -1,9 +1,11 @@
 const jwt = require('jsonwebtoken');
-
+require('dotenv').config();
 
 const authMiddleware = (req, res, next) => {
   
   const authHeader = req.headers['authorization'];
+  console.log(authHeader)
+  console.log(req.headers['content-length'])
   const token = authHeader && authHeader.split(' ')[1];
 
 
@@ -12,16 +14,19 @@ const authMiddleware = (req, res, next) => {
   }
 
   
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-  
-    if (err) {
-      return res.status(403).json({ message: 'Invalid token' });
-    }
+ let verifytoken= jwt.verify(token, process.env.JWT_SECRET)
 
-   
-    req.user = user;
-    next();
-  });
+  
+ console.log(verifytoken)
+  if (!verifytoken) {
+    return res.status(403).json({ message: 'Invalid token' });
+  }
+
+ 
+
+  
+  next();
+
 };
 
 module.exports = authMiddleware;

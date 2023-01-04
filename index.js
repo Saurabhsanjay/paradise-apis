@@ -10,7 +10,7 @@ const cors=require('cors')
 const authRoute=require('./src/routes/auth')
 const productRoute=require('./src/routes/auth')
 const { getAllProducts, getProductById } = require("./src/controllers/product.controller")
-const {  getAllUsers, getUserByID } = require("./src/controllers/user.controller")
+const {  getAllUsers, data, getUserByID } = require("./src/controllers/user.controller")
 
 mongoose.set('strictQuery', true);
 const PORT = 8080
@@ -21,12 +21,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
  app.use(cors());
  
-app.use("/auth",authRoute)
-app.use("/auth",productRoute)
-app.use("/auth",getAllProducts)
-app.use("/auth",getProductById)
-app.use("/",getAllUsers)
-app.use("/", getUserByID);
+app.use("/rest",authRoute)
+app.use("/rest",productRoute)
+app.use("/rest",getAllProducts)
+app.use("/rest",getProductById)
+app.use("/rest",getAllUsers)
+ app.use("/rest", getUserByID);
 
 
 app.get("/", (req, res) => {

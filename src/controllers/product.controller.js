@@ -1,4 +1,6 @@
 const productModel=require("../model/product.model")
+const ObjectId = require('mongoose').Types.ObjectId;
+
 
 const productRoute=async(req,res)=>{
 
@@ -33,11 +35,15 @@ const getAllProducts = async (req, res) => {
 
 const getProductById = async (req, res) => {
   try {
-    const product = await productModel.findById(req.params.id);
+    const product = await productModel.findById(ObjectId(req.params._id));
     if (!product) {
       return res.status(404).send({ error: 'Product not found' });
     }
-    return res.status(200).send({ product });
+    else{
+      return res.status(200).send(product);
+
+
+    }
   } catch (err) {
     console.error(err);
     return res.status(500).send({ error: 'Internal server error' });
