@@ -6,9 +6,9 @@ const CartSchema= new Schema({
     user:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"user",
-       
+       required:true
     },
-        id: { type: Number },
+        id: { type: Number},
         qty: { type: Number, required: true },
         image: { type: String, required: true },
         title: { type: String, required: true },

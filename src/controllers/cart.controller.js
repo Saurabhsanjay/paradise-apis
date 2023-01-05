@@ -7,9 +7,10 @@ const addProduct=async(req,res)=>{
        const product=new CartModel({
         price,title,image,description,qty,user
        })
-       if(title){
-        return res.status(404).send({ErrorMessage:"Items Already Added In Cart"})
-       }
+    //         const check=CartModel.find({});
+    //          if(check){
+    //     return res.status(404).send({ErrorMessage:"Items Already Added In Cart"})
+    //    }
        await product.save();
        res.status(201).send({product})
 
