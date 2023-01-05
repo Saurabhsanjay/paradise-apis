@@ -11,6 +11,7 @@ const authRoute=require('./src/routes/auth')
 const productRoute=require('./src/routes/auth')
 const { getAllProducts, getProductById } = require("./src/controllers/product.controller")
 const {  getAllUsers, data, getUserByID } = require("./src/controllers/user.controller")
+const { addProduct, getAllCartProducts, DeleteCartProduct, updateCartProduct } = require("./src/controllers/cart.controller")
 
 mongoose.set('strictQuery', true);
 const PORT = 8080
@@ -27,6 +28,10 @@ app.use("/rest",getAllProducts)
 app.use("/rest",getProductById)
 app.use("/rest",getAllUsers)
  app.use("/rest", getUserByID);
+ app.use("/rest", addProduct);
+ app.use("/rest", getAllCartProducts);
+ app.use("/rest", DeleteCartProduct);
+ app.use("/rest", updateCartProduct);
 
 
 app.get("/", (req, res) => {
