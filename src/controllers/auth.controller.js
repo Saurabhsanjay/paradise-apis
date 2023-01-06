@@ -9,7 +9,7 @@ const signin=async(req,res)=>{
 
 const user =await UserModel.findOne({email});
     if(user){
-        return res.status(400).send({error:'user already exists'});
+        return res.status(400).send('user already exists');
     }
 
     bcrypt.hash(password,10,async(err,hash)=>{

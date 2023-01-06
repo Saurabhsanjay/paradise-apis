@@ -17,7 +17,7 @@ const data=async(req,res)=>{
 
     }catch(err){
       console.log(err)
-        return res.status(401).send({ error: "Invalid token" });
+        return res.status(401).send({ error: "Invalid Response" });
     }
 }
 
