@@ -7,13 +7,13 @@ const data=async(req,res)=>{
       // console.log(token)
       //   const decoded=jwt.verify(token,process.env.JWT_SECRET);
 
-        const user=await UserModel.findById(req.params._id);
+        const user=await UserModel.findById(req.params.id);
         // console.log(decoded)
 
         if(!user){
             return res.status(404).send({error:"User not found"})
         }
-        return res.status(200).send({id: user._id, name: user.name, email: user.email })
+        return res.status(200).send({user})
 
     }catch(err){
       console.log(err)

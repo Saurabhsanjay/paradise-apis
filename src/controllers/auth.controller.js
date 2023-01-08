@@ -48,7 +48,7 @@ const login = async(req,res) => {
     // const token = jwt.sign(data, jwtSecretKey, { expiresIn: "1d" });
   
     // Send the JWT and the user's name in the response
-    return res.status(200).send({ token, name: user.name, email });
+    return res.status(200).send({id:user._id, token, name: user.name, email });
   }
   
 
