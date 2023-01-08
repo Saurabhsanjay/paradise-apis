@@ -3,7 +3,7 @@ const CartModel =require("../model/cart.model");
 
 const addProduct=async(req,res)=>{
     try {
-       const {id,title,image,price,description,qty,user}=req.body;
+       const {id,title,image,price,description,qty,user,updatedqty}=req.body;
        const product=new CartModel({
         price,title,image,description,qty,user,updatedqty
        })
