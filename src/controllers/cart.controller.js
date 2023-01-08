@@ -5,7 +5,7 @@ const addProduct=async(req,res)=>{
     try {
        const {id,title,image,price,description,qty,user}=req.body;
        const product=new CartModel({
-        price,title,image,description,qty,user
+        price,title,image,description,qty,user,updatedqty
        })
     //         const check=CartModel.find({});
     //          if(check){

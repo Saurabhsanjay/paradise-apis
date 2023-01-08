@@ -19,6 +19,7 @@ const CartSchema= new Schema({
         selection4_url: { type: String},
         selection5: { type: String},
         selection5_url: { type: String},
+        updatedqty:{type:Number,reqired:true}
     
 })
 
